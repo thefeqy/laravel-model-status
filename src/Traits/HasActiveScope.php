@@ -33,4 +33,26 @@ trait HasActiveScope
             $this->fillable[] = $columnName;
         }
     }
+
+    /**
+     * Activate the model by setting the status to the configured "active" value.
+     *
+     * @return $this
+     */
+    public function activate(): bool
+    {
+        $this->{Config::get('model-status.column_name', 'status')} = Config::get('model-status.default_value', 'active');
+        return $this->save();
+    }
+
+    /**
+     * Deactivate the model by setting the status to the configured "inactive" value.
+     *
+     * @return $this
+     */
+    public function deactivate(): bool
+    {
+        $this->{Config::get('model-status.column_name', 'status')} = Config::get('model-status.inactive_value', 'inactive');
+        return $this->save();
+    }
 }

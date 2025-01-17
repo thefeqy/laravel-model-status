@@ -12,6 +12,7 @@ A Laravel package to automate adding configurable status columns to models and m
 - Add a configurable `status` column to models and migrations.
 - Automatically handle global scopes for active statuses.
 - Enforce user activity with the `EnsureAuthenticatedUserIsActive` middleware.
+- Activate or deactivate models with simple methods.
 - Support dynamic configuration for column name, default value, and length.
 - Includes a `make:model-status` command.
 
@@ -136,16 +137,42 @@ Instead of registering a string alias for the middleware, you can reference it b
 
 - try to access the `companies` route to make sure that only active companies are included in the response
 
+## Activating and Deactivating Models
+The `HasActiveScope` trait provides two methods: `activate` and `deactivate`. These methods dynamically use the configuration values for the `status` column to update the mode status.
+
+### Activate a Model
+```php
+$model = ExampleModel::find(1);
+if ($model->activate()) {
+    echo "Model activated successfully!";
+} else {
+    echo "Failed to activate model.";
+}
+```
+
+### Deactivate a Model
+```php
+$model = ExampleModel::find(1);
+if ($model->deactivate()) {
+    echo "Model deactivated successfully!";
+} else {
+    echo "Failed to deactivate model.";
+}
+```
+
+
 ## Configuration
-Edit the `config/model-status.php` file to customize the column name, default value, and length:
+Edit the `config/model-status.php` file to customize the column name, default value, inactive value, and length:
 
 ```php
-    return [
-        'column_name' => 'status',
-        'default_value' => 'active',
-        'column_length' => 10,
-    ];
+return [
+    'column_name' => 'status', // The name of the status column
+    'default_value' => 'active', // The value for the "active" state
+    'inactive_value' => 'inactive', // The value for the "inactive" state
+    'column_length' => 10, // The maximum length of the status column
+];
 ```
+If you want to use a different column name (e.g., `account_status`), update the `column_name` value in `config/model-status.php` and ensure the corresponding database schema matches.
 
 ## Example Configuration Use Case
 

@@ -23,13 +23,13 @@ A Laravel package to automate adding configurable status columns to models and m
 You can install the package via Composer:
 
 ```bash
-    composer require thefeqy/laravel-model-status
+composer require thefeqy/laravel-model-status
 ```
 
 Optionally, you can publish the configuration file:
 
 ```bash
-    php artisan vendor:publish --tag=config
+php artisan vendor:publish --tag=config
 ```
 
 
@@ -53,7 +53,7 @@ class ExampleModel extends Model
 You can use the custom Artisan command to create models and migrations with a `status` column automatically:
 
 ```bash
-    php artisan make:model-status Example
+php artisan make:model-status Example
 ```
 
 This will:
@@ -65,12 +65,12 @@ This will:
 Retrieve Active Models (Default Behavior)
 
 ```php
-    $activeModels = ExampleModel::all();
+$activeModels = ExampleModel::all();
 ```
 
 Include Inactive Models
 ```php
-    $allModels = ExampleModel::withoutActive()->get();
+$allModels = ExampleModel::withoutActive()->get();
 ```
 
 ## Middleware Usage
@@ -80,18 +80,18 @@ The package includes the `EnsureAuthenticatedUserIsActive` middleware, which enf
 Instead of registering a string alias for the middleware, you can reference it by class name in your route definition:
 
 ```php
-    use Illuminate\Support\Facades\Route;
-    use Thefeqy\ModelStatus\Middleware\EnsureAuthenticatedUserIsActive;
+use Illuminate\Support\Facades\Route;
+use Thefeqy\ModelStatus\Middleware\EnsureAuthenticatedUserIsActive;
 
-    Route::middleware(['auth', EnsureAuthenticatedUserIsActive::class])->group(function () {
-        Route::get('/dashboard', function () {
-            return 'Welcome to your dashboard!';
-        });
+Route::middleware(['auth', EnsureAuthenticatedUserIsActive::class])->group(function () {
+    Route::get('/dashboard', function () {
+        return 'Welcome to your dashboard!';
     });
+});
 
-    Route::get('/login', function () {
-        return 'Login page';
-    })->name('login');
+Route::get('/login', function () {
+    return 'Login page';
+})->name('login');
 ```
 
 ### Behavior
@@ -101,7 +101,7 @@ Instead of registering a string alias for the middleware, you can reference it b
     - A `403 Forbidden` response will be returned with the message:
 
 ```
-    This account is suspended. Please contact the administrator.
+This account is suspended. Please contact the administrator.
 ```
 ---
 
@@ -110,27 +110,26 @@ Instead of registering a string alias for the middleware, you can reference it b
 1- Use the `make:model-status` command to create a model with a `status` column and include the `HasActiveScope` trait:
 
 ```php
-    php artisan make:model-status Company
+php artisan make:model-status Company
 ```
 
 2- Update the database schema to include a `status` column in the `companies` table (if not already present):
 
 ```php 
-    php artisan migrate
+php artisan migrate
 ```
 
 3. Protect your routes using the middleware to ensure only active users can access them:
 
 ```php
+use App\Models\Company;
+use Thefeqy\ModelStatus\Middleware\EnsureAuthenticatedUserIsActive;
 
-    use App\Models\Company;
-    use Thefeqy\ModelStatus\Middleware\EnsureAuthenticatedUserIsActive;
-
-    Route::middleware(['auth', EnsureAuthenticatedUserIsActive::class])->group(function () {
-        Route::get('/companies', function () {
-            return view('companies', ['companies' => Company::get()]);
-        });
+Route::middleware(['auth', EnsureAuthenticatedUserIsActive::class])->group(function () {
+    Route::get('/companies', function () {
+        return view('companies', ['companies' => Company::get()]);
     });
+});
 ```
 
 4. Test the functionality:
@@ -179,7 +178,7 @@ If you want to use a different column name (e.g., `account_status`), update the 
 - If you change the `column_name` to `state` in the config, the migration will automatically generate:
 
 ```php
-    $table->string('state', 10)->default('active');
+$table->string('state', 10)->default('active');
 ```
 
 - The global scope and the `HasActiveScope` trait will also dynamically adapt to use `state` instead of `status`.

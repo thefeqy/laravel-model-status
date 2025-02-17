@@ -6,7 +6,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\Test;
@@ -16,7 +16,7 @@ use Thefeqy\ModelStatus\Tests\TestCase;
 
 class EnsureAuthenticatedUserIsActiveTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     protected function setUp(): void
     {

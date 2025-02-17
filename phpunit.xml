@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.0/phpunit.xsd"
     bootstrap="vendor/autoload.php"
-    colors="true"
-    executionOrder="depends,defects"
+    executionOrder="depends"
     failOnEmptyTestSuite="true"
-    extensions="Pest\Plugins\PhpUnit\Extension"
+    colors="true"
 >
-    <testsuite name="Unit">
-        <directory suffix="Test.php">tests/Unit</directory>
-    </testsuite>
-    <testsuite name="Feature">
-        <directory suffix="Test.php">tests/Feature</directory>
-    </testsuite>
-    <source>
-        <include>
-            <directory suffix=".php">./src</directory>
-        </include>
-    </source>
+
+    <testsuites>
+        <testsuite name="Laravel Model Status Test Suite">
+            <directory suffix="Test.php">tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+    </php>
+
 </phpunit>

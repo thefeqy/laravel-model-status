@@ -4,6 +4,7 @@ namespace Thefeqy\ModelStatus;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Thefeqy\ModelStatus\Commands\InstallModelStatusCommand;
 use Thefeqy\ModelStatus\Commands\MakeModelWithStatus;
 
 class LaravelModelStatusServiceProvider extends ServiceProvider
@@ -30,6 +31,7 @@ class LaravelModelStatusServiceProvider extends ServiceProvider
         // Register commands
         $this->commands([
             MakeModelWithStatus::class,
+            InstallModelStatusCommand::class
         ]);
     }
 }

@@ -3,38 +3,20 @@
 use Illuminate\Support\Facades\Auth;
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Status Column Name
     |--------------------------------------------------------------------------
     |
-    | Define the name of the column that will store the model's status.
-    | This allows flexibility to use a different name instead of "status".
+    | This is the column that will store the model's status.
+    | You can customize this column name if your database uses a different name.
+    |
+    | Default: 'status'
     |
     */
-    'column_name' => 'status',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Default Active Status
-    |--------------------------------------------------------------------------
-    |
-    | Define what value represents an "active" model in your application.
-    | This value will be used when a model is activated.
-    |
-    */
-    'default_value' => 'active',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default Inactive Status
-    |--------------------------------------------------------------------------
-    |
-    | Define what value represents an "inactive" model.
-    | This value will be used when a model is deactivated.
-    |
-    */
-    'inactive_value' => 'inactive',
+    'column_name' => env('MODEL_STATUS_COLUMN', 'status'),
 
     /*
     |--------------------------------------------------------------------------
@@ -45,21 +27,48 @@ return [
     | The default is set to 10 characters, which is enough for "active"/"inactive".
     |
     */
-    'column_length' => 10,
+    'column_length' => env('MODEL_STATUS_COLUMN_LENGTH', 'inactive'),
 
     /*
     |--------------------------------------------------------------------------
-    | Admin Detector
+    | Default Active Status Value
     |--------------------------------------------------------------------------
     |
-    | Define a function that determines if the current user is an admin.
-    | If the user is an admin, the active scope will be disabled automatically.
-    | This function should return true if the user is an admin, and false otherwise.
+    | This value represents the "active" status of a model.
+    | It will be used as the default status when a model is activated.
     |
-    | Example implementations:
-    | - Using an `is_admin` flag in the users table.
-    | - Using a `role` field to check if the user is "admin".
-    | - Checking if the authenticated user belongs to a specific guard.
+    | Default: 'active'
+    |
+    */
+
+    'default_value' => env('MODEL_STATUS_ACTIVE', 'active'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Inactive Status Value
+    |--------------------------------------------------------------------------
+    |
+    | This value represents the "inactive" status of a model.
+    | It will be used as the default status when a model is deactivated.
+    |
+    | Default: 'inactive'
+    |
+    */
+
+    'inactive_value' => env('MODEL_STATUS_INACTIVE', 'inactive'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Detector for Active Scope Bypass
+    |--------------------------------------------------------------------------
+    |
+    | If the authenticated user is an admin, they should be able to see all
+    | records, including inactive ones. Define the logic to detect admin users.
+    |
+    | Example:
+    | function () {
+    |     return auth()->check() && auth()->user()->is_admin;
+    | }
     |
     */
     'admin_detector' => function () {

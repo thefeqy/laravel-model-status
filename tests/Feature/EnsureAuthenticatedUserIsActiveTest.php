@@ -9,6 +9,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
+use PHPUnit\Framework\Attributes\Test;
 use Thefeqy\ModelStatus\Middleware\EnsureAuthenticatedUserIsActive;
 use Thefeqy\ModelStatus\Status;
 use Thefeqy\ModelStatus\Tests\TestCase;
@@ -41,7 +42,7 @@ class EnsureAuthenticatedUserIsActiveTest extends TestCase
         parent::tearDown();
     }
 
-    /** @test */
+    #[Test]
     public function inactive_users_are_denied_access()
     {
         $user = FakeUser::create(['name' => 'Inactive User', 'status' => Status::inactive()]);
@@ -51,7 +52,7 @@ class EnsureAuthenticatedUserIsActiveTest extends TestCase
         $response->assertForbidden();
     }
 
-    /** @test */
+    #[Test]
     public function active_users_can_access_routes()
     {
         $user = FakeUser::create(['name' => 'Active User', 'status' => Status::active()]);

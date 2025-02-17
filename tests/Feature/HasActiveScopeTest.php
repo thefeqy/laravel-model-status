@@ -5,6 +5,7 @@ namespace Thefeqy\ModelStatus\Tests\Feature;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use PHPUnit\Framework\Attributes\Test;
 use Thefeqy\ModelStatus\Status;
 use Thefeqy\ModelStatus\Tests\TestCase;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
@@ -31,7 +32,7 @@ class HasActiveScopeTest extends TestCase
         parent::tearDown();
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_only_active_models_by_default()
     {
         $product1 = FakeProduct::create(['name' => 'Active Product', 'status' => Status::active()]);

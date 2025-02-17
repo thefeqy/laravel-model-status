@@ -10,8 +10,8 @@ class Status
     public function __construct(public readonly string $value)
     {
         // Validate the value before setting it
-        if (!in_array($value, self::allowedStatuses())) {
-            throw new UnexpectedValueException("Invalid status value: '$value'. Allowed values: " . implode(', ', self::allowedStatuses()));
+        if (! in_array($value, self::allowedStatuses())) {
+            throw new UnexpectedValueException("Invalid status value: '$value'. Allowed values: ".implode(', ', self::allowedStatuses()));
         }
     }
 

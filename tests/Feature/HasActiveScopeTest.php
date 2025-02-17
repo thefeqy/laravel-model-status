@@ -5,8 +5,8 @@ namespace Thefeqy\ModelStatus\Tests\Feature;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Thefeqy\ModelStatus\Tests\TestCase;
 use Thefeqy\ModelStatus\Status;
+use Thefeqy\ModelStatus\Tests\TestCase;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class HasActiveScopeTest extends TestCase
@@ -52,6 +52,8 @@ class FakeProduct extends Model
     use HasActiveScope;
 
     protected $table = 'products';
+
     protected $fillable = ['name', 'status'];
+
     public $timestamps = true;
 }

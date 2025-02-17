@@ -17,7 +17,7 @@ trait HasActiveScope
             $isAdmin = call_user_func($adminDetector);
         }
 
-        if (!$isAdmin) {
+        if (! $isAdmin) {
             static::addGlobalScope('active', function (Builder $builder) {
                 $builder->where(
                     Config::get('model-status.column_name', 'status'),
@@ -34,12 +34,12 @@ trait HasActiveScope
 
     public function initializeHasActiveScope(): void
     {
-        if (!property_exists($this, 'fillable')) {
+        if (! property_exists($this, 'fillable')) {
             $this->fillable = [];
         }
 
         $columnName = Config::get('model-status.column_name', 'status');
-        if (!in_array($columnName, $this->fillable)) {
+        if (! in_array($columnName, $this->fillable)) {
             $this->fillable[] = $columnName;
         }
     }
@@ -52,6 +52,7 @@ trait HasActiveScope
     public function activate(): bool
     {
         $this->{Config::get('model-status.column_name', 'status')} = Status::active();
+
         return $this->save();
     }
 
@@ -63,6 +64,7 @@ trait HasActiveScope
     public function deactivate(): bool
     {
         $this->{Config::get('model-status.column_name', 'status')} = Status::inactive();
+
         return $this->save();
     }
 }

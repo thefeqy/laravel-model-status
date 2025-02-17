@@ -6,12 +6,12 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
-use Thefeqy\ModelStatus\Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
 use Thefeqy\ModelStatus\Middleware\EnsureAuthenticatedUserIsActive;
 use Thefeqy\ModelStatus\Status;
+use Thefeqy\ModelStatus\Tests\TestCase;
 
 class EnsureAuthenticatedUserIsActiveTest extends TestCase
 {
@@ -70,5 +70,6 @@ class FakeUser extends Model implements AuthenticatableContract
     use Authenticatable; // Implements Laravel's authentication methods
 
     protected $table = 'users';
+
     protected $fillable = ['name', 'status'];
 }

@@ -3,8 +3,8 @@
 namespace Thefeqy\ModelStatus\Tests\Unit;
 
 use PHPUnit\Framework\Attributes\Test;
-use Thefeqy\ModelStatus\Tests\TestCase;
 use Thefeqy\ModelStatus\Status;
+use Thefeqy\ModelStatus\Tests\TestCase;
 
 class StatusTest extends TestCase
 {

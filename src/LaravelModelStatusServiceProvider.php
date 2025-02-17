@@ -13,7 +13,7 @@ class LaravelModelStatusServiceProvider extends ServiceProvider
     {
         // Publish configuration
         $this->publishes([
-            __DIR__ . '/../config/model-status.php' => config_path('model-status.php'),
+            __DIR__.'/../config/model-status.php' => config_path('model-status.php'),
         ], 'config');
 
         // Register middleware
@@ -24,14 +24,14 @@ class LaravelModelStatusServiceProvider extends ServiceProvider
     {
         // Merge the package's default config. Published config will override it at runtime.
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/model-status.php',
+            __DIR__.'/../config/model-status.php',
             'model-status'
         );
 
         // Register commands
         $this->commands([
             MakeModelWithStatus::class,
-            InstallModelStatusCommand::class
+            InstallModelStatusCommand::class,
         ]);
     }
 }

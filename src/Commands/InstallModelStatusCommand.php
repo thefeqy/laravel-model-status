@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 class InstallModelStatusCommand extends Command
 {
     protected $signature = 'model-status:install';
+
     protected $description = 'Prepares the Laravel Model Status package for use in Laravel.';
 
     private const REPO_URL = 'https://github.com/thefeqy/laravel-model-status';
@@ -17,6 +18,7 @@ class InstallModelStatusCommand extends Command
         // Check if the package is already installed
         if ($this->isAlreadyInstalled()) {
             $this->warn('⚠️ Laravel Model Status is already installed. No changes were made.');
+
             return;
         }
 
@@ -60,6 +62,7 @@ class InstallModelStatusCommand extends Command
     {
         if (file_exists(config_path('model-status.php'))) {
             $this->warn('⚠️ Config file already exists: config/model-status.php');
+
             return;
         }
 
@@ -79,13 +82,14 @@ class InstallModelStatusCommand extends Command
 
         if (! file_exists($filePath)) {
             $this->warn("⚠️ Skipping: {$envFile} not found.");
+
             return;
         }
 
         $fileContent = file_get_contents($filePath);
 
         // Environment variables related to Model Status
-        $envSection = <<<EOL
+        $envSection = <<<'EOL'
 
 # --------------------------------------------------------------------------
 # 📌 Laravel Model Status Configuration
@@ -102,11 +106,12 @@ EOL;
         // Check if any of the variables already exist
         if (str_contains($fileContent, 'MODEL_STATUS_COLUMN')) {
             $this->info("✅ {$envFile} is already up to date.");
+
             return;
         }
 
         // Append the section to the .env file
-        file_put_contents($filePath, PHP_EOL . $envSection . PHP_EOL, FILE_APPEND);
+        file_put_contents($filePath, PHP_EOL.$envSection.PHP_EOL, FILE_APPEND);
 
         $this->info("✅ Added Laravel Model Status environment variables to {$envFile}");
     }
@@ -131,11 +136,11 @@ EOL;
         $this->info('Opening GitHub repository... 🌍');
 
         if (PHP_OS_FAMILY === 'Darwin') {
-            exec('open ' . self::REPO_URL);
+            exec('open '.self::REPO_URL);
         } elseif (PHP_OS_FAMILY === 'Windows') {
-            exec('start ' . self::REPO_URL);
+            exec('start '.self::REPO_URL);
         } elseif (PHP_OS_FAMILY === 'Linux') {
-            exec('xdg-open ' . self::REPO_URL);
+            exec('xdg-open '.self::REPO_URL);
         }
     }
 }

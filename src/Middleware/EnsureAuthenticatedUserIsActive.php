@@ -24,7 +24,7 @@ class EnsureAuthenticatedUserIsActive
         $columnName = Config::get('model-status.column_name', 'status');
 
         // Check the user's status
-        if ($request->user()->{$columnName} !== Status::ACTIVE->value) {
+        if ($request->user()->{$columnName} !== Status::active()) {
             auth()->logout();
 
             throw new AccessDeniedHttpException(

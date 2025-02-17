@@ -21,6 +21,11 @@
             "Thefeqy\\ModelStatus\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Thefeqy\\ModelStatus\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
@@ -32,5 +37,8 @@
         "test": "vendor/bin/phpunit"
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^12.0"
+    }
 }

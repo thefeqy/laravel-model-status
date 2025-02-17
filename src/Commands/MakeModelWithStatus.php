@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
+use Thefeqy\ModelStatus\Enums\Status;
 
 class MakeModelWithStatus extends Command
 {
@@ -47,18 +48,17 @@ class MakeModelWithStatus extends Command
     }
 
     /**
-     * Add the status column to the migration file.
+     * Add the status column to the migration file with values from config.
      */
     protected function addStatusColumnToMigration(string $filePath): void
     {
         $columnName = Config::get('model-status.column_name', 'status');
-        $defaultValue = Config::get('model-status.default_value', 'active');
         $columnLength = Config::get('model-status.column_length', 10);
 
         $content = file_get_contents($filePath);
         $updatedContent = str_replace(
             "\$table->timestamps();",
-            "\$table->string('$columnName', $columnLength)->default('$defaultValue');\n            \$table->timestamps();",
+            "\$table->string('$columnName', $columnLength)->default(\\" . Status::class . "::active());\n            \$table->timestamps();",
             $content
         );
         file_put_contents($filePath, $updatedContent);

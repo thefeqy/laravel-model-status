@@ -4,7 +4,7 @@ namespace Thefeqy\ModelStatus\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Config;
-use Thefeqy\ModelStatus\Enums\Status;
+use Thefeqy\ModelStatus\Status;
 
 trait HasActiveScope
 {

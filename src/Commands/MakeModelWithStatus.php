@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use Thefeqy\ModelStatus\Enums\Status;
+use Thefeqy\ModelStatus\Status;
 
 class MakeModelWithStatus extends Command
 {

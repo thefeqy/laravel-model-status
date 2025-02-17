@@ -4,17 +4,27 @@ namespace Thefeqy\ModelStatus\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Config;
+use Thefeqy\ModelStatus\Enums\Status;
 
 trait HasActiveScope
 {
     public static function bootHasActiveScope(): void
     {
-        static::addGlobalScope('active', function (Builder $builder) {
-            $builder->where(
-                Config::get('model-status.column_name', 'status'),
-                Config::get('model-status.default_value', 'active')
-            );
-        });
+        $isAdmin = false;
+        $adminDetector = Config::get('model-status.admin_detector');
+
+        if (is_callable($adminDetector)) {
+            $isAdmin = call_user_func($adminDetector);
+        }
+
+        if (!$isAdmin) {
+            static::addGlobalScope('active', function (Builder $builder) {
+                $builder->where(
+                    Config::get('model-status.column_name', 'status'),
+                    Status::active()
+                );
+            });
+        }
     }
 
     public function scopeWithoutActive(Builder $query): Builder
@@ -41,7 +51,7 @@ trait HasActiveScope
      */
     public function activate(): bool
     {
-        $this->{Config::get('model-status.column_name', 'status')} = Config::get('model-status.default_value', 'active');
+        $this->{Config::get('model-status.column_name', 'status')} = Status::active();
         return $this->save();
     }
 
@@ -52,7 +62,7 @@ trait HasActiveScope
      */
     public function deactivate(): bool
     {
-        $this->{Config::get('model-status.column_name', 'status')} = Config::get('model-status.inactive_value', 'inactive');
+        $this->{Config::get('model-status.column_name', 'status')} = Status::inactive();
         return $this->save();
     }
 }

@@ -2,6 +2,9 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/thefeqy/laravel-model-status.svg?style=flat-square)](https://packagist.org/packages/thefeqy/laravel-model-status)
 [![Total Downloads](https://img.shields.io/packagist/dt/thefeqy/laravel-model-status.svg?style=flat-square)](https://packagist.org/packages/thefeqy/laravel-model-status)
+[![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-blue)](https://php.net)
+![GitHub Workflow Status](https://github.com/thefeqy/laravel-model-status/actions/workflows/run-tests.yml/badge.svg)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
 
 A Laravel package that simplifies **status management** for Eloquent models.
 

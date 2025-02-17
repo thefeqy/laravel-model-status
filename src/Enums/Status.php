@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Config;
 
 enum Status: string
 {
+   #[\Deprecated]
+    case ACTIVE = 'active';
+    #[\Deprecated]
+    case INACTIVE = 'inactive';
+
     /**
      * Get the actual active status value from the config.
      */

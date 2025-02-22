@@ -27,12 +27,8 @@ trait HasActiveScope
         }
     }
 
-
     /**
      * Scope a query to only include active models.
-     *
-     * @param Builder $query
-     * @return Builder
      */
     public static function scopeWithActive(Builder $query): Builder
     {
@@ -44,9 +40,6 @@ trait HasActiveScope
 
     /**
      * Scope a query to only include active models.
-     *
-     * @param Builder $query
-     * @return Builder
      */
     public function scopeWithoutActive(Builder $query): Builder
     {
@@ -55,7 +48,6 @@ trait HasActiveScope
 
     /**
      * Initialize the trait by adding the status column to the fillable array.
-     * @return void
      */
     public function initializeHasActiveScope(): void
     {

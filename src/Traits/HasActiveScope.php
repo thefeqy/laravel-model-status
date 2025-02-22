@@ -27,11 +27,36 @@ trait HasActiveScope
         }
     }
 
+
+    /**
+     * Scope a query to only include active models.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public static function scopeWithActive(Builder $query): Builder
+    {
+        return $query->where(
+            Config::get('model-status.column_name', 'status'),
+            Status::active()
+        );
+    }
+
+    /**
+     * Scope a query to only include active models.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
     public function scopeWithoutActive(Builder $query): Builder
     {
         return $query->withoutGlobalScope('active');
     }
 
+    /**
+     * Initialize the trait by adding the status column to the fillable array.
+     * @return void
+     */
     public function initializeHasActiveScope(): void
     {
         if (! property_exists($this, 'fillable')) {

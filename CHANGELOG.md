@@ -5,6 +5,12 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.2.1] - 2025-02-22
+### 🚀 Enhancements
+- **Added withActiveScope to retrieve only active models**
+
+---
+
 ## [v1.2.0] - 2025-02-17
 ### 🚀 Enhancements
 - **Added a local installation command** (`php artisan model-status:install`) to publish config and set up `.env` keys.

@@ -10,45 +10,45 @@ A Laravel package that simplifies **status management** for Eloquent models.
 
 ---
 
-## **📑 Table of Contents**
-- [✨ Features](#-features)
-- [📦 Installation](#-installation)
-    - [🔧 Step 1: Run the Installation Command](#-step-1-run-the-installation-command)
-- [⚙️ Configuration](#️-configuration)
-    - [🌍 Using `.env` Variables](#-using-env-variables)
-- [🚀 Usage](#-usage)
+## **Table of Contents**
+- [Features](#features)
+- [Installation](#installation)
+    - [Step 1: Run the Installation Command](#step-1-run-the-installation-command)
+- [Configuration](#configuration)
+    - [Using `.env` Variables](#using-env-variables)
+- [Usage](#usage)
     - [Using the `HasActiveScope` Trait](#using-the-hasactivescope-trait)
     - [Querying Models](#querying-models)
     - [Using the Middleware](#using-the-middleware)
       - [Add Middleware to Routes](#add-middleware-to-routes)
 
-- [👑 Admin Bypass for Active Scope](#-admin-bypass-for-active-scope)
-- [🛠 Advanced Configuration](#-advanced-configuration)
-- [🧪 Testing](#-testing)
-- [🔒 Security](#-security)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+- [Admin Bypass for Active Scope](#admin-bypass-for-active-scope)
+- [Advanced Configuration](#advanced-configuration)
+- [Testing](#testing)
+- [Security](#security)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## **✨ Features**
-- ✅ **`HasActiveScope` Trait**: Automatically filters models with active status.
-- ✅ **Admin Bypass**: Admin users can see all models, including inactive ones.
-- ✅ **Helper Methods**: `$model->status->isActive()` and `$model->status->isInactive()`.
-- ✅ **Dynamic Configuration**: Define custom statuses & column names via `.env`.
-- ✅ **Installation Command**: `php artisan model-status:install` for easy setup.
-- ✅ **PHP 8.3 Support**.
+## Features
+- **`HasActiveScope` Trait**: Automatically filters models with active status.
+- **Admin Bypass**: Admin users can see all models, including inactive ones.
+- **Helper Methods**: `$model->status->isActive()` and `$model->status->isInactive()`.
+- **Dynamic Configuration**: Define custom statuses & column names via `.env`.
+- **Installation Command**: `php artisan model-status:install` for easy setup.
+- **PHP 8.3 Support**.
 
 ---
 
-## **📦 Installation**
+## Installation
 You can install the package via Composer:
 
 ```bash
 composer require thefeqy/laravel-model-status
 ```
 
-### 🔧 Step 1: Run the Installation Command
+### Step 1: Run the Installation Command
 ```bash
 php artisan model-status:install
 ```
@@ -61,10 +61,10 @@ This will:
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 You can customize the package settings in:
 
-📂 `config/model-status.php`
+`config/model-status.php`
 ```php
 return [
     'column_name' => env('MODEL_STATUS_COLUMN', 'status'),
@@ -76,10 +76,10 @@ return [
     },
 ];
 ```
-### 🌍 Using .env Variables
+### Using .env Variables
 Instead of modifying `config/model-status.php`, you can override values in .env:
 
-📂 `.env`
+`.env`
 
 ```dotenv
 MODEL_STATUS_COLUMN=state
@@ -88,7 +88,7 @@ MODEL_STATUS_INACTIVE=disabled
 ```
 Now, the package will automatically adapt to your setup.
 
-## 🚀 Usage
+## Usage
 
 ### Using the HasActiveScope Trait
 To enable status management in a model:
@@ -108,15 +108,15 @@ Now, inactive models are automatically excluded from queries.
 --- 
 
 ### Querying Models
-✅ Get Active Models (Default Behavior)
+Get Active Models (Default Behavior)
 ```php
 $activeProducts = Product::all(); // Returns only active products
 ```
-✅ Get All Models (Including Inactive)
+Get All Models (Including Inactive)
 ```php
 $allProducts = Product::withoutActive()->get();
 ```
-✅ Manually Activating / Deactivating a Model
+Manually Activating / Deactivating a Model
 ```php
 $product = Product::find(1);
 
@@ -124,7 +124,7 @@ $product->activate(); // Set status to "active"
 $product->deactivate(); // Set status to "inactive"
 ```
 
-✅ Checking a Model's Status
+Checking a Model's Status
 ```php
 if ($product->status->isActive()) {
     echo "Product is active!";
@@ -156,7 +156,7 @@ Route::middleware(['auth', EnsureAuthenticatedUserIsActive::class])->group(funct
 
 ---
 
-## 👑 Admin Bypass for Active Scope
+## Admin Bypass for Active Scope
 By default, admin users can see inactive models.
 
 This behavior is controlled in `config/model-status.php`:
@@ -168,8 +168,8 @@ This behavior is controlled in `config/model-status.php`:
 ```
 ---
 
-## 🛠 Advanced Configuration
-If you need a different column name or status values, update 📂 `.env`:
+## Advanced Configuration
+If you need a different column name or status values, update `.env`:
 
 ```dotenv
 MODEL_STATUS_COLUMN=state
@@ -187,7 +187,7 @@ instead of:
 $table->string('status', 10)->default('active');
 ```
 
-## 🧪 Testing
+## Testing
 Run tests using Pest PHP:
 
 ```sh
@@ -196,14 +196,14 @@ or
 vendor/bin/phpunit
 ```
 
-## 🔒 Security
+## Security
 If you discover a security vulnerability, please report it via email:
 📩 [thefeqy@gmail.com](mailto:thefeqy@gmail.com)   
 
-## 🤝 Contributing
+## Contributing
 
 Want to improve this package? Check out [CONTRIBUTING](CONTRIBUTING.md) for contribution guidelines.
 
-## 📄 License
+## License
 
 This package is open-source software licensed under the [MIT License](LICENSE).

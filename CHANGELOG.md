@@ -5,6 +5,13 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.3.0] - 2025-02-26
+- **Added support for Laravel 12**
+- **Added support for PHP 8.4**
+- **Drop support for Laravel 10**
+
+---
+
 ## [v1.2.1] - 2025-02-22
 ### Enhancements
 - **Added withActiveScope to retrieve only active models**

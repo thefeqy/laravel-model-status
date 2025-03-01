@@ -29,6 +29,7 @@ trait HasActiveScope
 
     /**
      * Scope a query to only include active models.
+     * @deprecated Use the `active` scope instead. This method will be removed in version 2.0.0.
      */
     public static function scopeWithActive(Builder $query): Builder
     {

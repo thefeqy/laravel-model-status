@@ -29,6 +29,7 @@ trait HasActiveScope
 
     /**
      * Scope a query to only include active models.
+     *
      * @deprecated Use the `active` scope instead. This method will be removed in version 2.0.0.
      */
     public static function scopeWithActive(Builder $query): Builder
@@ -41,8 +42,6 @@ trait HasActiveScope
 
     /**
      * Scope a query to only include active models.
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return Builder
      */
     public function scopeActive(Builder $query): Builder
     {
@@ -54,8 +53,6 @@ trait HasActiveScope
 
     /**
      * Scope a query to only include inactive models.
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return Builder
      */
     public function scopeInActive(Builder $query): Builder
     {

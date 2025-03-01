@@ -5,6 +5,16 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.4.0] - 2025-03-01
+### Enhancements
+- **Added `active()` scope to retrieve only active models**
+- **Added `inActive()` scope to retrieve only inactive models**
+- **Deprecated `withActive()` scope and replace it with `active()` scope directly to maintain naming convention**
+
+---
+
+
+
 ## [v1.3.0] - 2025-02-26
 - **Added support for Laravel 12**
 - **Added support for PHP 8.4**

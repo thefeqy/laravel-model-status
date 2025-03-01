@@ -114,7 +114,7 @@ $activeProducts = Product::all(); // Returns only active products
 ```
 Get All Models (Including Inactive)
 ```php
-$allProducts = Product::withoutActive()->get();
+$allProducts = Product::inActive()->get();
 ```
 Manually Activating / Deactivating a Model
 ```php

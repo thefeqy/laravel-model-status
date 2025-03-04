@@ -1,4 +1,6 @@
-# Laravel Model Status
+# 🔁 Laravel Model Status
+
+![Laravel Model Status](assets/images/laravel-model-status.png)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/thefeqy/laravel-model-status.svg?style=flat-square)](https://packagist.org/packages/thefeqy/laravel-model-status)
 [![Total Downloads](https://img.shields.io/packagist/dt/thefeqy/laravel-model-status.svg?style=flat-square)](https://packagist.org/packages/thefeqy/laravel-model-status)
@@ -19,8 +21,10 @@ A Laravel package that simplifies **status management** for Eloquent models.
 - [Usage](#usage)
     - [Using the `HasActiveScope` Trait](#using-the-hasactivescope-trait)
     - [Querying Models](#querying-models)
+    - [Using Status Casting](#using-status-casting)
+    - [Cascade Deactivation](#cascade-deactivation)
     - [Using the Middleware](#using-the-middleware)
-      - [Add Middleware to Routes](#add-middleware-to-routes)
+    - [Add Middleware to Routes](#add-middleware-to-routes)
 
 - [Admin Bypass for Active Scope](#admin-bypass-for-active-scope)
 - [Advanced Configuration](#advanced-configuration)
@@ -136,6 +140,66 @@ if ($product->status->isInactive()) {
 ```
 ---
 
+### Using Status Casting
+
+To ensure `status` is always cast to a `Status` object, use the `StatusCast` class.
+
+#### Apply Status Casting in Models
+```php
+use Thefeqy\ModelStatus\Casts\StatusCast;
+
+class Product extends Model
+{
+    use HasActiveScope;
+
+    protected $fillable = ['name', 'status', 'category_id'];
+
+    protected $casts = [
+        'status' => StatusCast::class,
+    ];
+}
+```
+
+#### Example Usage
+```php
+$product = Product::find(1);
+
+if ($product->status->isActive()) {
+    echo "Product is active!";
+}
+```
+
+Now, `$product->status` is an instance of `Status`, allowing method calls like `isActive()` and `isInactive()`.
+
+---
+
+### Cascade Deactivation
+
+If a model is deactivated, its related models can also be **automatically deactivated**.
+
+#### Example
+```php
+class Category extends Model
+{
+    use HasActiveScope;
+
+    protected $fillable = ['name', 'status'];
+
+    protected array $cascadeDeactivate = ['products'];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+}
+```
+Now, deactivating a **category** will also **deactivate all products** under it:
+```php
+$category = Category::find(1);
+$category->deactivate();
+```
+
+---
 ### Using the Middleware
 
 The package includes the `EnsureAuthenticatedUserIsActive` middleware, which enforces that only users with an active status can access certain routes.

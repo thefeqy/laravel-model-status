@@ -129,8 +129,6 @@ trait HasActiveScope
 
     /**
      * Define which relationships should be deactivated when this model is deactivated.
-     *
-     * @return array
      */
     protected function getCascadeRelations(): array
     {

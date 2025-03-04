@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Thefeqy\ModelStatus\Casts\StatusCast;
-use Thefeqy\ModelStatus\Tests\TestCase;
 use Thefeqy\ModelStatus\Status;
+use Thefeqy\ModelStatus\Tests\TestCase;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class CascadeDeactivationTest extends TestCase
@@ -65,7 +65,9 @@ class FakeCategory extends Model
     use HasActiveScope;
 
     protected $table = 'categories';
+
     protected $fillable = ['name', 'status'];
+
     protected array $cascadeDeactivate = ['products'];
 
     protected $casts = [
@@ -86,6 +88,7 @@ class FakeScopedProduct extends Model
     use HasActiveScope;
 
     protected $table = 'products';
+
     protected $fillable = ['name', 'category_id'];
 
     protected $attributes = [

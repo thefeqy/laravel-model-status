@@ -106,6 +106,34 @@ trait HasActiveScope
     {
         $this->{Config::get('model-status.column_name', 'status')} = Status::inactive();
 
-        return $this->save();
+        $this->save();
+
+        $this->cascadeDeactivation();
+
+        return true;
+    }
+
+    /**
+     * Deactivate related models.
+     */
+    protected function cascadeDeactivation(): void
+    {
+        foreach ($this->getCascadeRelations() as $relation) {
+            if (method_exists($this, $relation)) {
+                $this->{$relation}()->update([
+                    Config::get('model-status.column_name', 'status') => Status::inactive(),
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Define which relationships should be deactivated when this model is deactivated.
+     *
+     * @return array
+     */
+    protected function getCascadeRelations(): array
+    {
+        return property_exists($this, 'cascadeDeactivate') ? $this->cascadeDeactivate : [];
     }
 }

@@ -8,8 +8,6 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## v1.5.0 - 2025-03-04
 
-### [v1.5.0] - 2025-03-04
-
 #### New Features
 
 - **Status Casting (`StatusCast`)**
